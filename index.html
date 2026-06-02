@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indoblade ICT Solutions — Unified Communications & System Integrator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0b;
+    --white: #f5f4ef;
+    --accent: #e85d26;
+    --accent2: #1a6fff;
+    --mid: #1e1e21;
+    --surface: #141416;
+    --muted: #6b6b72;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(232,93,38,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,11,0.85);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    letter-spacing: -0.02em; color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); font-size: 0.9rem; text-decoration: none;
+    font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--accent); color: #fff;
+    border: none; padding: 0.6rem 1.4rem;
+    font-family: 'Figtree', sans-serif; font-weight: 600;
+    font-size: 0.85rem; cursor: pointer;
+    letter-spacing: 0.03em;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #d44d1b; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 60%; height: 100%;
+    background: radial-gradient(ellipse at 80% 30%, rgba(26,111,255,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 90% 70%, rgba(232,93,38,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 800; line-height: 1.0;
+    letter-spacing: -0.03em;
+    max-width: 780px;
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: normal; color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(245,244,239,0.6);
+    max-width: 520px; line-height: 1.7;
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    padding: 0.85rem 2rem;
+    font-family: 'Figtree', sans-serif; font-weight: 600;
+    font-size: 0.95rem; cursor: pointer; border: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #d44d1b; transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--white); background: transparent;
+    padding: 0.85rem 2rem; border: 1px solid var(--border);
+    font-family: 'Figtree', sans-serif; font-weight: 500;
+    font-size: 0.95rem; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 2rem 4rem;
+    background: var(--surface);
+  }
+  .stat-item {
+    padding: 0.5rem 2rem;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--accent); line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-label::before {
+    content: '//'; color: var(--muted);
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: rgba(245,244,239,0.55);
+    max-width: 560px; font-size: 1rem;
+    line-height: 1.7; margin-bottom: 3.5rem;
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .service-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.25s;
+  }
+  .service-card:hover { background: var(--mid); }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    transition: width 0.35s ease;
+  }
+  .service-card:hover::after { width: 100%; }
+  .service-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border-accent);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--accent);
+  }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .service-card p {
+    color: var(--muted); font-size: 0.9rem;
+    line-height: 1.65;
+  }
+  .service-tag {
+    display: inline-block; margin-top: 1.25rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    color: var(--accent); text-transform: uppercase;
+    border: 1px solid var(--border-accent);
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* ── PRODUCTS / BRANDS ── */
+  .products-section { background: var(--surface); }
+  .brands-grid {
+    display: flex; flex-wrap: wrap; gap: 0;
+    border: 1px solid var(--border);
+  }
+  .brand-item {
+    flex: 1 1 200px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: background 0.2s;
+  }
+  .brand-item:hover { background: var(--mid); }
+  .brand-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1rem;
+  }
+  .brand-cat {
+    font-size: 0.78rem; color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* ── WHY INDOBLADE ── */
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .why-left h2 { margin-bottom: 0.75rem; }
+  .feature-list { list-style: none; margin-top: 2.5rem; }
+  .feature-list li {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    color: rgba(245,244,239,0.75);
+    font-size: 0.95rem;
+  }
+  .feature-list li:first-child { border-top: 1px solid var(--border); }
+  .feature-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: var(--accent);
+    letter-spacing: 0.1em; min-width: 28px;
+    margin-top: 2px;
+  }
+  .why-right {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+    align-self: stretch;
+  }
+  .metric-box {
+    background: var(--surface);
+    padding: 2rem;
+  }
+  .metric-box .n {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem; font-weight: 800;
+    line-height: 1; color: var(--white);
+  }
+  .metric-box .n span { color: var(--accent); }
+  .metric-box .d {
+    font-size: 0.8rem; color: var(--muted);
+    margin-top: 0.5rem; line-height: 1.4;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  /* ── CLIENTS ── */
+  .clients-section {
+    background: linear-gradient(180deg, var(--black) 0%, var(--surface) 100%);
+  }
+  .client-logos {
+    display: flex; flex-wrap: wrap;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .client-box {
+    flex: 1 1 180px;
+    background: var(--surface);
+    padding: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .client-box:hover { background: var(--mid); }
+  .client-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    color: rgba(245,244,239,0.4);
+    letter-spacing: 0.05em; text-align: center;
+    transition: color 0.2s;
+  }
+  .client-box:hover .client-name { color: var(--white); }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--accent);
+    padding: 5rem 4rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: 'INDOBLADE';
+    position: absolute; right: -2rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 12rem; font-weight: 800;
+    color: rgba(0,0,0,0.1); line-height: 1;
+    pointer-events: none; letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+  .cta-band h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    font-weight: 800; color: #fff; max-width: 480px;
+    letter-spacing: -0.025em;
+  }
+  .btn-dark {
+    background: var(--black); color: #fff;
+    padding: 1rem 2.5rem; font-weight: 700;
+    font-family: 'Figtree', sans-serif;
+    font-size: 1rem; cursor: pointer; border: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    text-decoration: none; white-space: nowrap;
+    transition: transform 0.15s;
+  }
+  .btn-dark:hover { transform: translateY(-2px); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--surface);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; padding: 0;
+  }
+  .contact-left {
+    padding: 5rem 4rem;
+    border-right: 1px solid var(--border);
+  }
+  .contact-right { padding: 5rem 4rem; }
+  .contact-info-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-info-item:first-of-type { border-top: 1px solid var(--border); margin-top: 2rem; }
+  .contact-info-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 0.35rem;
+  }
+  .contact-info-value {
+    font-size: 0.95rem; color: var(--white);
+  }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.8rem 1rem;
+    font-family: 'Figtree', sans-serif;
+    font-size: 0.9rem;
+    outline: none; resize: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: rgba(232,93,38,0.5);
+  }
+  .form-group select option { background: var(--mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-mid {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: var(--muted);
+    text-align: center; letter-spacing: 0.05em;
+  }
+  .footer-right {
+    font-size: 0.8rem; color: var(--muted);
+    text-align: right;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease forwards; }
+  h1 { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.7s 0.3s ease both; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stats-strip { grid-template-columns: 1fr 1fr; padding: 1.5rem; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-right { grid-template-columns: 1fr 1fr; }
+    .contact-section { grid-template-columns: 1fr; }
+    .contact-left { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.5rem; }
+    .contact-right { padding: 3rem 1.5rem; }
+    .cta-band { flex-direction: column; text-align: center; padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-right { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">INDO<span>BLADE</span></a>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#klien">Klien</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <a href="#kontak" class="nav-cta">Konsultasi Gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">System Integrator &amp; Value-Added Reseller</div>
+  <h1>Infrastruktur <em>Komunikasi</em><br>Kelas Enterprise</h1>
+  <p class="hero-sub">
+    Indoblade ICT Solutions menghadirkan solusi Unified Communications, Contact Center, dan integrasi sistem end-to-end untuk bisnis Indonesia yang terus berkembang.
+  </p>
+  <div class="hero-actions">
+    <a href="#kontak" class="btn-primary">Mulai Proyek Anda</a>
+    <a href="#layanan" class="btn-ghost">Lihat Layanan →</a>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Tahun Pengalaman</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Proyek Selesai</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">99.9%</div>
+    <div class="stat-label">Uptime SLA</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">Dukungan Teknis</div>
+  </div>
+</div>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="section-label">Layanan</div>
+  <h2>Solusi Terintegrasi<br>dari Hulu ke Hilir</h2>
+  <p class="section-desc">Dari desain arsitektur hingga implementasi dan managed services — kami tangani seluruh siklus infrastruktur komunikasi Anda.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">☎</div>
+      <h3>Unified Communications</h3>
+      <p>Integrasi voice, video, messaging, dan collaboration dalam satu platform terpadu. Dukungan IP-PBX, SIP trunk, dan migrasi dari sistem legacy.</p>
+      <span class="service-tag">IP-PBX · VoIP · SIP</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎧</div>
+      <h3>Contact Center Solutions</h3>
+      <p>Implementasi omnichannel contact center dengan routing cerdas, workforce management, dan integrasi CRM untuk pengalaman pelanggan optimal.</p>
+      <span class="service-tag">Omnichannel · CRM · IVR</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>System Integration</h3>
+      <p>Integrasi lintas platform — ERP, CRM, helpdesk, dan aplikasi bisnis — menjadi ekosistem yang kohesif dan efisien.</p>
+      <span class="service-tag">API · Middleware · ESB</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">☁</div>
+      <h3>Cloud & Infrastructure</h3>
+      <p>Perancangan dan migrasi infrastruktur ke cloud — hybrid, private, atau public. Kubernetes, containerization, dan high-availability architecture.</p>
+      <span class="service-tag">Kubernetes · Cloud · HA</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡</div>
+      <h3>Network Security</h3>
+      <p>Audit keamanan jaringan, implementasi firewall, SIEM, dan monitoring proaktif untuk melindungi aset digital bisnis Anda.</p>
+      <span class="service-tag">Firewall · SIEM · SOC</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙</div>
+      <h3>Managed Services</h3>
+      <p>Pengelolaan infrastruktur IT end-to-end dengan SLA terjamin. Monitoring 24/7, patch management, dan response time terukur.</p>
+      <span class="service-tag">NOC · SLA · Support</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK & MITRA -->
+<section id="produk" class="products-section">
+  <div class="section-label">Produk &amp; Mitra</div>
+  <h2>Ekosistem Teknologi<br>Terpercaya</h2>
+  <p class="section-desc">Kami adalah Value-Added Reseller dari vendor-vendor telekomunikasi dan ICT terkemuka dunia.</p>
+  <div class="brands-grid">
+    <div class="brand-item">
+      <div class="brand-name">Cisco</div>
+      <div class="brand-cat">Networking · UC · Security</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Avaya</div>
+      <div class="brand-cat">Contact Center · UC</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Asterisk / FreePBX</div>
+      <div class="brand-cat">Open Source IP-PBX</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Palo Alto Networks</div>
+      <div class="brand-cat">Next-Gen Firewall</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Red Hat</div>
+      <div class="brand-cat">Enterprise Linux · OpenShift</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Sangoma</div>
+      <div class="brand-cat">VoIP · Telephony</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">3CX</div>
+      <div class="brand-cat">Business Phone System</div>
+    </div>
+    <div class="brand-item">
+      <div class="brand-name">Wazuh</div>
+      <div class="brand-cat">SIEM · XDR · Security</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENGAPA INDOBLADE -->
+<section id="tentang">
+  <div class="why-grid">
+    <div class="why-left">
+      <div class="section-label">Mengapa Indoblade</div>
+      <h2>Keahlian Teknis.<br>Hasil Terukur.</h2>
+      <p class="section-desc">Didukung tim dengan latar belakang riset akademis dan pengalaman implementasi nyata di industri.</p>
+      <ul class="feature-list">
+        <li>
+          <span class="feature-num">01</span>
+          <span>Pengalaman langsung dalam proyek modernisasi telepon di perusahaan manufaktur skala nasional (TMMIN)</span>
+        </li>
+        <li>
+          <span class="feature-num">02</span>
+          <span>Tim bersertifikasi: Cisco NetAcad, Palo Alto Networks, Red Hat Academy</span>
+        </li>
+        <li>
+          <span class="feature-num">03</span>
+          <span>Riset aktif di bidang Kubernetes, Edge Computing, dan IoT — memastikan solusi selalu relevan dengan teknologi terkini</span>
+        </li>
+        <li>
+          <span class="feature-num">04</span>
+          <span>Managed web services dan dukungan pasca-implementasi dengan SLA transparan dan monitoring proaktif</span>
+        </li>
+        <li>
+          <span class="feature-num">05</span>
+          <span>Fleksibel: dari UKM hingga enterprise — paket disesuaikan dengan kebutuhan dan anggaran klien</span>
+        </li>
+      </ul>
+    </div>
+    <div class="why-right">
+      <div class="metric-box">
+        <div class="n">48<span>+</span></div>
+        <div class="d">Sitasi Akademis<br>Google Scholar</div>
+      </div>
+      <div class="metric-box">
+        <div class="n">5<span>+</span></div>
+        <div class="d">Publikasi IEEE<br>Terindeks</div>
+      </div>
+      <div class="metric-box">
+        <div class="n">3<span>×</span></div>
+        <div class="d">Sertifikasi<br>Vendor Aktif</div>
+      </div>
+      <div class="metric-box">
+        <div class="n">∞</div>
+        <div class="d">Komitmen<br>Jangka Panjang</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KLIEN -->
+<section id="klien" class="clients-section">
+  <div class="section-label">Klien &amp; Referensi</div>
+  <h2>Dipercaya oleh<br>Perusahaan Terkemuka</h2>
+  <p class="section-desc">Portofolio proyek yang mencakup industri manufaktur, retail, dan layanan digital.</p>
+  <div class="client-logos">
+    <div class="client-box"><div class="client-name">TMMIN<br><small style="font-size:0.65rem;font-weight:400;">Toyota Motor Manufacturing</small></div></div>
+    <div class="client-box"><div class="client-name">Skinnaire<br><small style="font-size:0.65rem;font-weight:400;">Managed Web Services</small></div></div>
+    <div class="client-box"><div class="client-name">PDAM<br><small style="font-size:0.65rem;font-weight:400;">Layanan Air Daerah</small></div></div>
+    <div class="client-box"><div class="client-name">Telkom University<br><small style="font-size:0.65rem;font-weight:400;">Academic Partner</small></div></div>
+    <div class="client-box"><div class="client-name">Indoblade<br><small style="font-size:0.65rem;font-weight:400;">Internal Projects</small></div></div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Siap Transformasi Infrastruktur Komunikasi Bisnis Anda?</h2>
+  <a href="#kontak" class="btn-dark">Hubungi Kami Sekarang →</a>
+</div>
+
+<!-- KONTAK -->
+<div id="kontak" class="contact-section">
+  <div class="contact-left">
+    <div class="section-label">Kontak</div>
+    <h2>Mulai Percakapan</h2>
+    <p class="section-desc" style="margin-bottom:0">Konsultasi teknis gratis untuk kebutuhan infrastruktur komunikasi Anda.</p>
+    <div class="contact-info-item">
+      <div class="contact-info-label">WhatsApp / Phone</div>
+      <div class="contact-info-value">+62 853-2033-2025</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Email</div>
+      <div class="contact-info-value">bagus.aditya.it@gmail.com</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">LinkedIn</div>
+      <div class="contact-info-value">linkedin.com/in/goesaditya</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Lokasi</div>
+      <div class="contact-info-value">Pati, Jawa Tengah — Indonesia</div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="section-label" style="margin-top:0">Kirim Pesan</div>
+    <div class="form-group">
+      <label>Nama Lengkap</label>
+      <input type="text" placeholder="Budi Santoso">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="budi@perusahaan.com">
+    </div>
+    <div class="form-group">
+      <label>Kebutuhan</label>
+      <select>
+        <option value="">-- Pilih Layanan --</option>
+        <option>Unified Communications / IP-PBX</option>
+        <option>Contact Center</option>
+        <option>System Integration</option>
+        <option>Cloud & Infrastructure</option>
+        <option>Network Security</option>
+        <option>Managed Services</option>
+        <option>Lainnya</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Pesan</label>
+      <textarea rows="4" placeholder="Ceritakan kebutuhan atau tantangan teknis Anda..."></textarea>
+    </div>
+    <button class="btn-primary" style="width:100%;padding:1rem;" onclick="alert('Terima kasih! Kami akan menghubungi Anda segera.')">Kirim Pesan →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">INDO<span>BLADE</span> ICT Solutions</div>
+  <div class="footer-mid">
+    System Integrator · Unified Communications · Value-Added Reseller<br>
+    <span style="font-size:0.6rem;opacity:0.5;">© 2025 Indoblade ICT Solutions. All rights reserved.</span>
+  </div>
+  <div class="footer-right">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);">BUILD BETTER.<br>COMMUNICATE SMARTER.</span>
+  </div>
+</footer>
+
+</body>
+</html>
